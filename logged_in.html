@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            min-height: 100vh; /* Ensures the page takes up the full viewport height */
+        }
+
+        /* Sidebar styling */
+        .sidebar {
+            background-color: #002244;
+            color: #fff;
+            width: 160px; /* Default width for collapsed state */
+            padding: 15px 0;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: fixed; /* Fixes the sidebar to the viewport */
+            height: 100%; /* Full height */
+            transition: width 0.3s; /* Smooth transition for hover effect */
+        }
+
+        /* Sidebar expanded state on hover */
+        .sidebar:hover {
+            width: 200px;
+			left: 0;
+        }
+
+        /* Sidebar menu items */
+        .sidebar .menu-item {
+            width: 100%;
+            text-align: center;
+            margin: 10px 0;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            transition: background-color 0.3s;
+        }
+
+        /* Highlight menu item on hover */
+        .sidebar .menu-item:hover {
+            background-color: #004488;
+        }
+
+        /* Menu item icons */
+        .sidebar .menu-item img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+        /* Menu item text, hidden by default */
+        .menu-text {
+            display: none;
+            font-size: 16px;
+        }
+
+        /* Show menu text when sidebar is hovered */
+        .sidebar:hover .menu-text {
+            <!-- display: inline-block; -->
+        }
+
+        /* Main content area */
+        .content {
+            margin-left: 160px; /* Matches collapsed sidebar width */
+            flex-grow: 1; /* Ensures content expands to fill available space */
+            padding: 20px;
+            background-color: #f4f4f9;
+            transition: margin-left 0.3s; /* Matches sidebar transition */
+        }
+
+        /* Adjust content margin when sidebar is hovered */
+        .sidebar:hover ~ .content {
+            margin-left: 200px; /* Matches expanded sidebar width */
+        }
+
+        /* Utility class to hide elements */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Container for buttons in Payments section */
+        .button-container {
+            display: flex;
+            flex-direction: row;
+            gap: 10px; /* Adds spacing between buttons */
+            align-items: center;
+        }
+
+        /* Button styling */
+        .button {
+            width: 70px;
+            height: 40px;
+            background-color: #004488;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Button hover effect */
+        .button:hover {
+            background-color: #0066cc;
+        }
+
+        /* Ellipsis button styling */
+        .ellipsis {
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            background-color: #004488;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        /* Ellipsis hover effect */
+        .ellipsis:hover {
+            background-color: #0066cc;
+        }
+
+        /* Styling for additional buttons when visible */
+        .button-container .more-buttons {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Sidebar navigation menu -->
+    <div class="sidebar" id="sidebar">
+        <div class="menu-item">
+            <img src="home-icon.png" alt="Home">
+            <span class="menu-text">Home</span>
+        </div>
+        <div class="menu-item">
+            <img src="accounts-icon.png" alt="Accounts">
+            <span class="menu-text">Accounts</span>
+        </div>
+        <div class="menu-item" id="payments-menu">
+            <img src="payments-icon.png" alt="Payments">
+            <span class="menu-text">Payments</span>
+        </div>
+        <div class="menu-item">
+            <img src="tax-icon.png" alt="Tax">
+            <span class="menu-text">Tax</span>
+        </div>
+        <div class="menu-item">
+            <img src="cms-icon.png" alt="CMS">
+            <span class="menu-text">CMS</span>
+        </div>
+        <div class="menu-item">
+            <img src="treasury-icon.png" alt="Treasury">
+            <span class="menu-text">Treasury</span>
+        </div>
+        <div class="menu-item">
+            <img src="service-requests-icon.png" alt="Service Requests">
+            <span class="menu-text">Service Requests</span>
+        </div>
+        <!-- <button id="toggle-sidebar" style="margin-top: auto; padding: 10px; background-color: #004488; color: white; border: none; cursor: pointer;">Toggle</button> -->
+    </div>
+
+    <!-- Main content area -->
+    <div class="content">
+        <h1>Welcome, User</h1>
+        <p>Select a section from the menu to get started.</p>
+
+        <!-- Payments section -->
+        <div id="payments-content" class="hidden">
+            <h2>Payments</h2>
+            <div class="button-container">
+                <button class="button">Button 1</button>
+                <button class="button">Button 2</button>
+                <button class="button">Button 3</button>
+                <button class="ellipsis" id="ellipsis">&hellip;</button>
+
+                <!-- Additional buttons hidden by default -->
+                <div id="more-buttons" class="more-buttons hidden">
+                    <button class="button">Button 4</button>
+                    <button class="button">Button 5</button>
+                    <button class="button">Button 6</button>
+    </div>
+            </div>
+        </div>
+
+        <!-- Placeholder sections -->
+        <div id="home-content" class="hidden">
+            <h2>Home</h2>
+        </div>
+        <div id="accounts-content" class="hidden">
+            <h2>Accounts</h2>
+        </div>
+    </div>
+
+    <script>
+        // Utility function to toggle visibility of an element
+        function toggleVisibility(elementId) {
+            const element = document.getElementById(elementId);
+            if (element.classList.contains('hidden')) {
+                element.classList.remove('hidden');
+            } else {
+                element.classList.add('hidden');
+            }
+        }
+
+        // Event listener for Payments menu item
+        document.getElementById('payments-menu').addEventListener('click', function() {
+            // Hide all sections first
+            document.querySelectorAll('.content > div').forEach(section => {
+                section.classList.add('hidden');
+            });
+
+            // Show the Payments section
+            document.getElementById('payments-content').classList.remove('hidden');
+        });
+
+        // Event listener for ellipsis button
+        document.getElementById('ellipsis').addEventListener('click', function() {
+            const moreButtons = document.getElementById('more-buttons');
+            if (moreButtons.classList.contains('hidden')) {
+                moreButtons.classList.remove('hidden');
+            } else {
+                moreButtons.classList.add('hidden');
+            }
+        });
+
+        <!-- // Event listener for toggling the sidebar -->
+        <!-- document.getElementById('toggle-sidebar').addEventListener('click', function() { -->
+            <!-- const sidebar = document.getElementById('sidebar'); -->
+            <!-- sidebar.classList.toggle('expanded'); -->
+        <!-- }); -->
+    </script>
+</body>
+</html>
