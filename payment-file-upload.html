@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment File Upload</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        // Function to load the common layout
+        function loadLayout(callback) {
+            fetch('layout.html')
+                .then(response => response.text())
+                .then(data => {
+                    document.getElementById('layout-container').innerHTML = data;
+                    callback();
+                })
+                .catch(error => console.error('Error loading layout:', error));
+        }
+
+        // Function to initialize the page content
+        function initializePage() {
+            document.getElementById('page-content').innerHTML = `
+                    <h1>Payment File Upload</h1>
+                    <p>This is the Payment File Upload page.</p>
+                `;
+        }
+
+        // Function to load the layout and initialize the page
+        function loadAndInitialize() {
+            loadLayout(() => {
+                // Execute the script after loading the layout
+                const script = document.createElement('script');
+                script.src = 'layout.js';
+                script.onload = initializePage;
+                document.body.appendChild(script);
+            });
+        }
+    </script>
+</head>
+<body onload="loadAndInitialize()">
+    <div id="layout-container"></div>
+</body>
+</html>

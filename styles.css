@@ -1,0 +1,194 @@
+﻿/* General body styling */
+body {
+    font-family: 'Microsoft Sans Serif', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh; /* Ensures the page takes up the full viewport height */
+}
+
+.logout-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #ff4b5c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+    .logout-button:hover {
+        background-color: #ff6b7c;
+    }
+
+/* Sidebar styling */
+.sidebar {
+    background-color: #002244;
+    color: #fff;
+    width: 160px; /* Default width for collapsed state */
+    padding: 15px 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed; /* Fixes the sidebar to the viewport */
+    height: 100%; /* Full height */
+    transition: width 0.3s; /* Smooth transition for hover effect */
+}
+
+    /* Sidebar expanded state on hover */
+    .sidebar:hover {
+        width: 200px;
+        left: 0;
+    }
+
+    /* Sidebar menu items */
+    .sidebar .menu-item {
+        width: 100%;
+        text-align: center;
+        margin: 10px 0;
+        color: #fff;
+        padding: 10px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        transition: background-color 0.3s;
+    }
+
+        /* Highlight menu item on hover */
+        .sidebar .menu-item:hover {
+            background-color: #004488;
+        }
+
+        /* Menu item icons */
+        .sidebar .menu-item img {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+        }
+
+/* Menu item text, hidden by default */
+.menu-text {
+    display: none;
+    font-size: 16px;
+}
+
+/* Show menu text when sidebar is hovered */
+.sidebar:hover .menu-text {
+/*    display: inline-block;*/
+}
+
+/* Main content area */
+.content {
+    margin-left: 160px; /* Matches collapsed sidebar width */
+    flex-grow: 1; /* Ensures content expands to fill available space */
+    padding: 20px;
+    background-color: #f4f4f9;
+    transition: margin-left 0.3s; /* Matches sidebar transition */
+}
+
+/* Adjust content margin when sidebar is hovered */
+.sidebar:hover ~ .content {
+    margin-left: 200px; /* Matches expanded sidebar width */
+}
+
+/* Breadcrumb navigation styling */
+.breadcrumb {
+    list-style: none;
+    display: flex;
+    padding: 10px 15px;
+    margin: 0 0 20px 0;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+}
+
+    .breadcrumb li {
+        display: flex;
+        align-items: center;
+    }
+
+        .breadcrumb li + li:before {
+            content: ">";
+            padding: 0 10px;
+            color: #6c757d;
+        }
+
+    .breadcrumb a {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+    .breadcrumb li:last-child a {
+        color: #6c757d;
+        pointer-events: none;
+    }
+
+/* Utility class to hide elements */
+.hidden {
+    display: none !important;
+}
+
+/* Container for buttons in Payments section */
+.button-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px; /* Adds spacing between buttons */
+    align-items: center;
+}
+
+/* Button styling */
+.button {
+    width: 150px;
+    height: 40px;
+    background-color: white;
+    color: black;
+    border: 1px solid orange;
+    border-radius: 50px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    /* Button hover effect */
+    .button:hover {
+        background-color: darkorange;
+    }
+
+/* Ellipsis button styling */
+.ellipsis {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    background-color: white;
+    color: black;
+    border: 1px solid orange;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+    /* Ellipsis hover effect */
+    .ellipsis:hover {
+        background-color: darkorange;
+    }
+
+/* Styling for additional buttons when visible */
+.button-container .more-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
