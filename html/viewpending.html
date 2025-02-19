@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View and Authorise</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../javascript/layout.js" defer></script> <!-- Ensure this script is included -->
+</head>
+<body>
+    <div data-include="layout.html"></div>
+
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <!-- Main content area -->
+    <div class="content">
+        <h3>Authorisation </h3>
+        <p>You can view transactions pending for approval and authorise them on this page</p>
+        <div style="margin-bottom: 30px;"></div>
+        <div class="btn-group" style="width:100%;">
+            <button style="width:50%">View Transactions pending for approval</button>
+            <button style="width:50%">Authorise Payment</button>
+        </div>
+    </div>
+
+    <script src="../javascript/scroll-to-top.js"></script>
+    
+    <!--<script>
+        includeHTML();
+    </script>-->
+
+</body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment File Upload</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../javascript/layout.js" defer></script> <!-- Ensure this script is included -->
+    <style>
+        .main {
+            margin-top: 50px;
+            margin-left: 260px; /* Same as the width of the sidenav */
+            padding: 20px;
+            background-color: white;
+            min-height: 1000px; /* Used in this example to enable scrolling */
+        }
+
+        .container {
+            margin-top: 0px;
+            margin-left: 250px; /* Same as the width of the sidenav */
+            padding: 50px;
+            background-color: white;
+            min-height: 1000px; /* Used in this example to enable scrolling */
+        }
+
+        fieldset {
+            border: 1px solid #ddd !important;
+            margin: 0;
+            padding: 10px 150px 10px 10px;
+            width: 100%;
+        }
+    </style>
+    <script>
+        var select = document.getElementById("selectAccount");
+    </script>
+</head>
+
+<body>
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+    <div include-layout-html="logged_in.html"></div>
+
+    <!-- Sidebar navigation menu -->
+    <div class="sidebar">
+        <a href="#home">Home</a>
+        <a href="#accounts">Accounts</a>
+        <a class="active" href="#payments" data-section="payments">
+            Transfers & Bill Pay
+            <small><pre>all payments</pre></small>
+        </a>
+        <a href="#tax">Tax</a>
+        <a href="#cms">CMS</a>
+        <a href="#treasury">Treasury</a>
+        <a href="#service-requests">Service Requests</a>
+        <a href="#about">About</a>
+        <input type="text" name="search" font="" placeholder="Search..">
+    </div>
+
+    <div class="container">
+        <h2>Payment File Upload</h2>
+        <p>Upload a payment file to initiate a payment</p>
+        <fieldset>
+            <legend>Payment Details</legend>
+            Select account: <select name="account" id="selectAccount" onchange="getBalance()">
+                <option value="option" selected="selected">null</option>
+                <option value="account1">123456789010</option>
+                <option value="account2">123456789011</option>
+                <option value="account3">123456789012</option>
+            </select>
+            <span id="accountText"></span>
+            <script>
+                function getBalance() {
+                    var select = document.getElementById("selectAccount");
+                    var text = select.options[select.selectedIndex].text;
+                    if (text == '123456789010' || text == '123456789011' || text == '123456789012') {
+                        document.getElementById("accountText").innerText = "Available balance INR: " + text;
+                    } else {
+                        document.getElementById("accountText").innerText = "Select an account";
+                    }
+                }
+            </script>
+            <br><br>
+            Select file type: <select name="filetype" id="filetype" onchange="getFile()">
+                <option value="" selected="selected">Select a file type</option>
+                <optgroup label="Vendor Payment">
+                    <option value="select">Un-registered (ID)</option>
+                    <option value="select">Registered (ID)</option>
+                </optgroup>
+                <optgroup label="Salary Payment">
+                    <option value="select">Un-registered (CD)</option>
+                    <option value="select">Registered (CD)</option>
+                </optgroup>
+                <optgroup label="Tally Compatible">
+                    <option value="select">Un-registered Vendor (ID)</option>
+                    <option value="select">Registered Vendor (ID)</option>
+                    <option value="select">Salary Payment (CD)</option>
+                </optgroup>
+                <optgroup label="Custom File">
+                    <option value="select">Custom Vendor</option>
+                    <option value="select">Custom Salary</option>
+                </optgroup>
+            </select>
+            <script>
+                function getFile() {
+                    var select = document.getElementById("filetype");
+                    var text = select.options[select.selectedIndex].text;
+                    var downloadLink = document.getElementById("downloadLink");
+                    if (text == 'Un-registered (ID)' || text == 'Un-registered (CD)' || text == 'Un-registered Vendor (ID)') {
+                        downloadLink.href = "../files/PAB.xlsx";
+                        downloadLink.style.display = "block";
+                    } else if (text == 'Registered (ID)' || text == 'Registered (CD)' || text == 'Registered Vendor (ID)') {
+                        downloadLink.href = "path/to/registered_file";
+                        downloadLink.style.display = "block";
+                    } else {
+                        downloadLink.style.display = "none";
+                    }
+                }
+            </script>
+            <br><br>
+            <a id="downloadLink" href="#" style="display:none;">Download Sample File</a>
+            <br><br>
+            Payment date: <input type="date" id="date" name="date">
+            <br><br>
+            <form name="Payment" id="payment" action="#">
+                <label for="myfile">Select file:</label>
+                <input type="file" id="myfile" name="myfile"><br><br>
+                <button class="button">Submit</button>
+            </form>
+        </fieldset>
+    </div>
+
+    <!--<script>
+       includeHTML();
+    </script>-->
+
+    <script src="../javascript/scroll-to-top.js"></script>
+    <script src="../javascript/layout.js"></script>
+
+</body>
+</html>

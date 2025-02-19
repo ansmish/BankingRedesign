@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <!-- Logout button -->
+    <button class="logout-button" id="logout-button">Logout</button>
+    <!--Scroll to Top Button-->
+    <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+
+    <!-- Sidebar navigation menu -->
+    <div class="sidebar">
+        <a class="active" href="#home">Home</a>
+        <a href="#accounts">Accounts</a>
+        <a href="#payments" data-section="payments">
+            Transfers & Bill Pay
+            <small><pre>all payments</pre></small>
+        </a>
+        <a href="#tax">Tax</a>
+        <a href="#cms">CMS</a>
+        <a href="#treasury">Treasury</a>
+        <a href="#service-requests">Service Requests</a>
+        <a href="#about">About</a>
+        <input type="text" name="search" font="" placeholder="Search..">
+    </div>
+
+    <!-- Main content area -->
+    <div class="content">
+        <!-- Breadcrumb navigation -->
+        <ul class="breadcrumb" id="breadcrumb">
+            <li><a href="#" data-section="home">HOME</a></li>
+        </ul>
+
+        <h1>Welcome, User</h1>
+        <p>Select a section from the menu to get started.</p>
+
+        <!-- Payments section -->
+        <div id="payments-content" class="hidden">
+            <h2>Payments</h2>
+            <div class="button-container">
+                <button class="button" onclick="navigateTo('payment-file-upload.html')">Payment File Upload</button>
+                <button class="button" onclick="navigateTo('file-status-enquiry.html')">Reports Centre</button>
+                <button class="button" onclick="navigateTo('customise.html')">Customise Payment Settings</button>
+                <button class="ellipsis" id="ellipsis">&hellip;</button>
+
+                <!-- Additional buttons hidden by default -->
+                <div id="more-buttons" class="more-buttons hidden">                    
+                    <!--<button class="button" onclick="navigateTo('file-format-settings.html')">File Format Settings</button>-->
+                    <button class="button" onclick="navigateTo('viewpending.html')">View Transactions pending for approval</button>
+                    <button class="button" onclick="navigateTo('bulkreg.html')">Bulk Payee Registration</button>
+                    <button class="button" onclick="navigateTo('cancelschpymnt.html')">Cancel Scheduled Payment</button>
+                    <button class="button" onclick="navigateTo('favourite.html')">Select Favourite Rule</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Placeholder sections -->
+        <div id="home-content" class="hidden">
+            <h2>Home</h2>
+        </div>
+        <div id="accounts-content" class="hidden">
+            <h2>Accounts</h2>
+        </div>
+        <div id="tax-content" class="hidden">
+            <h2>Tax</h2>
+        </div>
+        <div id="cms-content" class="hidden">
+            <h2>CMS</h2>
+        </div>
+        <div id="treasury-content" class="hidden">
+            <h2>Treasury</h2>
+        </div>
+        <div id="service-requests-content" class="hidden">
+            <h2>Service Requests</h2>
+        </div>
+    </div>
+
+    <script src="../javascript/scroll-to-top.js"></script>
+    <!--<script src="../javascript/layout.js"></script>-->
+    <script>
+        // Utility function to toggle visibility of an element
+        function toggleVisibility(elementId) {
+            const element = document.getElementById(elementId);
+            if (element.classList.contains('hidden')) {
+                element.classList.remove('hidden');
+            } else {
+                element.classList.add('hidden');
+            }
+        }
+
+        // Event listener for sidebar links
+        document.querySelectorAll('.sidebar a').forEach(link => {
+            link.addEventListener('click', function (e) {
+                e.preventDefault();
+                const section = this.getAttribute('data-section') + '-content';
+
+                // Hide all sections first
+                document.querySelectorAll('.content > div').forEach(section => {
+                    section.classList.add('hidden');
+                });
+
+                // Show the selected section
+                document.getElementById(section).classList.remove('hidden');
+
+                // Update breadcrumb
+                updateBreadcrumb(this.getAttribute('data-section'));
+            });
+        });
+
+        //// Event listener for menu items
+        //document.querySelectorAll('.menu-item').forEach(item => {
+        //    item.addEventListener('click', function () {
+        //        const section = this.getAttribute('data-section') + '-content';
+
+        //        // Hide all sections first
+        //        document.querySelectorAll('.content > div').forEach(section => {
+        //            section.classList.add('hidden');
+        //        });
+
+        //        // Show the selected section
+        //        document.getElementById(section).classList.remove('hidden');
+
+        //        // Update breadcrumb
+        //        updateBreadcrumb(this.getAttribute('data-section'));
+        //    });
+        //});
+
+        // Event listener for ellipsis button
+        document.getElementById('ellipsis').addEventListener('click', function () {
+            const moreButtons = document.getElementById('more-buttons');
+            if (moreButtons.classList.contains('hidden')) {
+                moreButtons.classList.remove('hidden');
+            } else {
+                moreButtons.classList.add('hidden');
+            }
+        });
+
+        // Event listener for logout button
+        document.getElementById('logout-button').addEventListener('click', function () {
+            // Clear session storage and local storage
+            sessionStorage.clear();
+            localStorage.clear();
+
+            // Redirect to login page
+            window.location.href = 'index.html';
+        });
+
+        // Function to update breadcrumb
+        function updateBreadcrumb(section) {
+            const breadcrumb = document.getElementById('breadcrumb');
+            breadcrumb.innerHTML = `<li><a href="#" data-section="home">HOME</a></li>`;
+
+            if (section !== 'home') {
+                breadcrumb.innerHTML += `<li>${capitalizeFirstLetter(section)}</li>`;
+            }
+        }
+
+        // Utility function to capitalize the first letter of a string
+        function capitalizeFirstLetter(string) {
+            //return string.charAt(0).toUpperCase() + string.slice(1);
+            return string.toUpperCase();
+        }
+
+        // Event listener for breadcrumb links
+        document.getElementById('breadcrumb').addEventListener('click', function (e) {
+            if (e.target.tagName === 'A') {
+                e.preventDefault();
+                const section = e.target.getAttribute('data-section') + '-content';
+
+                // Hide all sections first
+                document.querySelectorAll('.content > div').forEach(section => {
+                    section.classList.add('hidden');
+                });
+
+                // Show the selected section
+                document.getElementById(section).classList.remove('hidden');
+
+                // Update breadcrumb
+                updateBreadcrumb(e.target.getAttribute('data-section'));
+            }
+        });
+
+        // Function to navigate to a new page
+        function navigateTo(page) {
+            window.location.href = page;
+        }
+    </script>
+</body>
+</html>

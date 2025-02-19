@@ -1,0 +1,330 @@
+﻿/* General body styling */
+body {
+    font-family: 'Microsoft Sans Serif', sans-serif;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh; /* Ensures the page takes up the full viewport height */
+}
+
+h2 {
+    color: black;
+}
+
+.logout-button {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #ff4b5c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.logout-button:hover {
+    background-color: #ff6b7c;
+}
+
+/* Sidebar styling */
+.sidebar {
+    margin: 0;
+    background-color: #002244;
+    color: #fff;
+    width: 200px; /* Default width for collapsed state */
+    padding: 15px 0;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    position: fixed; /* Fixes the sidebar to the viewport */
+    left: 0; /* Ensures the sidebar stays aligned to the left edge */
+    top: 0; /* Aligns the sidebar to the top of the viewport */
+    height: 100%; /* Full height */
+    transition: width 0.3s; /* Smooth transition for hover effect */
+    overflow: hidden; /* Enables scrolling if content exceeds viewport height */
+}
+.sidebar a {
+    display: block;
+    color: white;
+    padding: 16px;
+    text-decoration: none;
+}
+
+    .sidebar a.active {
+        background-color: #ff8500;
+        color: white;
+    }
+
+    .sidebar a:hover:not(.active) {
+        background-color: #fa9317;
+        color: white;
+    }
+/* Sidebar expanded state on hover */
+.sidebar:hover {
+    width: 250px;
+    left: 0;
+    overflow: auto; /* Allows scrolling for longer content */
+}
+
+    /* Sidebar menu items */
+    /*.sidebar .menu-item {
+        width: 100%;
+        text-align: left;
+        margin: 10px 0;
+        color: #fff;
+        padding: 10px;
+        cursor: pointer;
+        display: block;
+        transition: background-color 0.3s; 
+        text-decoration:none;
+    }*/
+
+    /* Highlight menu item on hover */
+    /*.sidebar .menu-item:hover {
+        background-color: #004488;
+    }*/
+
+    /* Menu item icons */
+    /*.sidebar .menu-item img {
+        width: 24px;
+        height: 24px;
+        margin-right: 10px;
+    }*/
+
+/* Menu item text, hidden by default */
+/*.menu-text {
+    display: none;
+    font-size: 16px;
+}*/
+
+/* Show menu text when sidebar is hovered */
+/*.sidebar:hover .menu-text {*/
+/*    display: inline-block;*/
+/*}*/
+
+/* Adjust content margin when sidebar is hovered */
+.sidebar:hover ~ .content {
+    margin-left: 250px; /* Matches expanded sidebar width */
+}
+div.content {
+    margin-left: 200px;
+    padding: 1px 16px;
+    height: 1000px;
+}
+
+/* Main content area */
+.content {
+    margin-left: 200px; /* Matches collapsed sidebar width */
+    flex-grow: 1; /* Ensures content expands to fill available space */
+    padding: 20px;
+    background-color: #f4f4f9;
+    transition: margin-left 0.3s; /* Matches sidebar transition */
+}
+
+/* Breadcrumb navigation styling */
+.breadcrumb {
+    list-style: none;
+    display: flex;
+    padding: 10px 15px;
+    margin: 0 0 20px 0;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+}
+
+    .breadcrumb li {
+        display: flex;
+        align-items: center;
+    }
+
+        .breadcrumb li + li:before {
+            content: ">";
+            padding: 0 10px;
+            color: #6c757d;
+        }
+
+    .breadcrumb a {
+        color: #007bff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+    .breadcrumb li:last-child a {
+        color: #6c757d;
+        pointer-events: none;
+    }
+
+/* Utility class to hide elements */
+.hidden {
+    display: none !important;
+}
+
+/* Container for buttons in Payments section */
+.button-container {
+    display: flex;
+    flex-direction: row;
+    gap: 10px; /* Adds spacing between buttons */
+    align-items: center;
+}
+
+/* Button styling */
+.button {
+    width: 150px;
+    height: 40px;
+    background-color: white;
+    color: black;
+    border: 1px solid orange;
+    border-radius: 50px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Button hover effect */
+    .button:hover {
+        background-color: darkorange;
+        font-size: 14px;
+        color: white;
+    }
+
+/*Begin - GROUPED BUTTON PROPERTIES*/
+.btn-group button {
+    background-color: white; /* White background */
+    border: 1px solid orange; /* Orange border */
+    color: black; /* Black text */
+    padding: 10px 24px; /* Some padding */
+    cursor: pointer; /* Pointer/hand icon */
+    float: left; /* Float the buttons side by side */
+}
+
+/* Clear floats (clearfix hack) */
+.btn-group:after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.btn-group button:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+}
+
+/* Add a background color on hover */
+.btn-group button:hover {
+    background-color: darkorange;
+}
+
+/*End - GROUPED BUTTON PROPERTIES*/
+
+/* Ellipsis button styling */
+.ellipsis {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    background-color: white;
+    color: black;
+    border: 1px solid orange;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Ellipsis hover effect */
+.ellipsis:hover {
+    background-color: darkorange;
+    color: white;
+}
+
+/* Styling for additional buttons when visible */
+.button-container .more-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+/* Scroll to Top button styling */
+#myBtn {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed/sticky position */
+    bottom: 20px; /* Place the button at the bottom of the page */
+    right: 30px; /* Place the button 30px from the right */
+    z-index: 99; /* Make sure it does not overlap */
+    border: none; /* Remove borders */
+    outline: none; /* Remove outline */
+    background-color: red; /* Set a background color */
+    color: white; /* Text color */
+    cursor: pointer; /* Add a mouse pointer on hover */
+    padding: 15px; /* Some padding */
+    border-radius: 10px; /* Rounded corners */
+    font-size: 18px; /* Increase font size */
+}
+
+#myBtn:hover {
+    background-color: #333; /* Add a dark-grey background on hover */
+}
+
+/* Responsive Sidebar: Transform to top navigation bar at 700px or less */
+@media screen and (max-width: 700px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+/*        flex-direction: row;
+        justify-content: space-around;*/
+    }
+
+/*        .sidebar .menu-item {
+            text-align: center;
+            padding: 10px 0;
+        }*/
+    .sidebar a {
+        float: left;
+    }
+
+    .content {
+        margin-left: 0;
+        margin-top: 60px; /* Adjust for top navigation bar height */
+    }
+}
+
+/* Responsive Sidebar: Vertically stack and center navigation links at 400px or less */
+@media screen and (max-width: 400px) {
+    .sidebar {
+        flex-direction: column;
+        align-items: center;
+    }
+    .sidebar a {
+        text-align: center;
+        float: none;
+    }
+
+/*        .sidebar .menu-item {
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+        }*/
+}
+
+/*Begin - SEARCH BAR PROPERTIES*/
+input[type=text] {
+    width: 160px;
+    padding: 16px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+    /* When the input field gets focus, change its width to 100% */
+    input[type=text]:focus {
+        width: 80%;
+    }
