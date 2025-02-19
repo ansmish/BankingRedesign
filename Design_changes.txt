@@ -50,4 +50,6 @@ Scroll to Top  - Done
 Dark theme	- 
 Breadcrumb navigation - Requires fixing
 Banner for client to use their own company image / logo / branding
+Implementing a Favicon
+Cosmetic changes to the payment page form
 
