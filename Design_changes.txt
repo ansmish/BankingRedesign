@@ -1,0 +1,53 @@
+Other features that can be implemented as POC for the redesign of the website include the following:
+
+1. Implementing a search bar that allows users to search for specific topics or keywords
+2. Adding a user-friendly navigation menu that categorizes the content on the website
+3. 'Scroll to the Top' feature that allows users to easily navigate back to the top of the page
+4. Create a Clickable Dropdown Menu
+5. Remember my choice i.e. checkbox on the login page to remember the module into which customer logs in frequently
+6. Implementing a 'Dark Mode' feature that allows users to switch between light and dark themes
+7. Adding a 'Print' button that allows users to print the content of a specific page
+8. Eliminate the need for multiple clicks to reach the desired page
+9. Eliminate so many file types and make it more user-friendly
+10. Implementing a 'Feedback' button that allows users to provide feedback on the website
+11. Show BP360 in a floating banner on the website
+12. Allow customer to mark the product/module as favorite for quicker access
+13. Implementing a 'Chat' feature that allows users to chat with customer support
+14. Implementing a breadcrumb navigation to overcome the issue of getting lost in the website, and to provide a clear path back to the homepage
+15. 
+
+***Begin - Condense menu options***
+Payment File Upload
+	File Format Settings
+Customise Payment Settings
+Validate File for Upload
+
+Select Favourite Rule
+Authorise Payment
+	View Transactions pending for approval
+Cancel Scheduled Payment
+
+Reports & MIS
+	File Status Enquiry
+	Sent Payment Advice
+Bulk Payee Registration
+***Begin - Condense menu options***
+
+**Bigger stuff**
+Design the Payments page
+	it should have the sidebar navigation
+	dropdowns to select:
+		the remitter account
+		the payment type
+			Once payment type is selected, the screen should display the download button to download the bulk file
+	Upload button
+	Submit button
+	
+**End of Bigger stuff**
+
+**Good to Have**
+Scroll to Top  - Done
+Dark theme	- 
+Breadcrumb navigation - Requires fixing
+Banner for client to use their own company image / logo / branding
+
