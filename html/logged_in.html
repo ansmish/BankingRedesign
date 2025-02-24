@@ -15,17 +15,17 @@
     <!-- Sidebar navigation menu -->
     <div class="sidebar">
         <a class="active" href="#home">Home</a>
-        <a href="#accounts">Accounts</a>
+        <a href="#accounts" data-section="accounts">Accounts</a>
         <a href="#payments" data-section="payments">
             Transfers & Bill Pay
             <small><pre>all payments</pre></small>
         </a>
-        <a href="#tax">Tax</a>
-        <a href="#cms">CMS</a>
-        <a href="#treasury">Treasury</a>
-        <a href="#service-requests">Service Requests</a>
-        <a href="#about">About</a>
-        <input type="text" name="search" font="" placeholder="Search..">
+        <a href="#tax" data-section="tax">Tax</a>
+        <a href="#cms" data-section="cms">CMS</a>
+        <a href="#treasury" data-section="treasury">Treasury</a>
+        <a href="#service-requests" data-section="service-requests">Service Requests</a>
+        <a href="#about" data-section="about">About</a>
+        <input type="text" name="search" font="" placeholder="Search...">
     </div>
 
     <!-- Main content area -->
@@ -48,7 +48,7 @@
                 <button class="ellipsis" id="ellipsis">&hellip;</button>
 
                 <!-- Additional buttons hidden by default -->
-                <div id="more-buttons" class="more-buttons hidden">                    
+                <div id="more-buttons" class="more-buttons hidden">
                     <!--<button class="button" onclick="navigateTo('file-format-settings.html')">File Format Settings</button>-->
                     <button class="button" onclick="navigateTo('viewpending.html')">View Transactions pending for approval</button>
                     <button class="button" onclick="navigateTo('bulkreg.html')">Bulk Payee Registration</button>
@@ -76,6 +76,9 @@
         </div>
         <div id="service-requests-content" class="hidden">
             <h2>Service Requests</h2>
+        </div>
+        <div id="about-content" class="hidden">
+            <h2>About Content</h2>
         </div>
     </div>
 
