@@ -29,13 +29,64 @@
             padding: 10px 150px 10px 10px;
             width: 100%;
         }
+
+        span {
+            font-size: 10px;
+            color: #666;
+        }
+        /* Button hover effect */
+        .button:hover,
+        .button-submit:hover,
+        .button-reset:hover {
+            background-color: darkorange;
+            font-size: 14px;
+            color: white;
+        }
+
+        .button-submit:hover {
+            background-color: green;
+        }
+
+        .button-reset:hover {
+            background-color: red;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        
     </style>
     <script>
         var select = document.getElementById("selectAccount");
     </script>
 </head>
 
-<body>
+<body onload="onPageLoad()">
+    <script>
+        //executed on page load; sets default payment type to single, and clears all fields
+        function onPageLoad() {
+            enableSingle();
+            clearFields();
+        }
+
+        //Clears all fields
+        function clearFields() {
+            document.getElementById("selectAccount").selectedIndex = 0; // clear Select account
+            document.getElementById("accountTextSingle").innerText = ""; // clear Account balance
+            document.getElementById("filetype").selectedIndex = 0; // clear Select file type
+            document.getElementById("date").value = ""; // clear Payment date
+            document.getElementById("myfile").value = ""; // clear Select file
+            document.getElementById("downloadLink").style.display = "none"; // hide download link
+        }
+
+        //Reset Button functionality
+        function onClickReset() {
+            if (confirm("Warning: This will reset all fields! Click OK to proceed or Cancel to return.")) {
+                onPageLoad();
+            }
+        }
+    </script>
+    
     <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
 
     <div include-layout-html="logged_in.html"></div>
@@ -58,24 +109,50 @@
 
     <div class="container">
         <h2>Payment File Upload</h2>
-        <p>Upload a payment file to initiate a payment</p>
+        <p>Upload a payment file to initiate payment</p>
         <fieldset>
-            <legend>Payment Details</legend>
-            Select account: <select name="account" id="selectAccount" onchange="getBalance()">
+            <legend><b>Payment Details</b></legend>
+            Select account:
+            <br>
+            <br>
+            <input type="radio" name="accountType" value="single" checked onclick="enableSingle()"> Single
+            <select name="account" id="selectAccount" onchange="getBalance()">
                 <option value="option" selected="selected">null</option>
                 <option value="account1">123456789010</option>
                 <option value="account2">123456789011</option>
                 <option value="account3">123456789012</option>
             </select>
-            <span id="accountText"></span>
+            <span id="accountTextSingle" style="font-family: 'Lucida Console'; font-size: 14px; color: black; background-color:lightyellow"></span>
+            <br>
+            <br>
+            <input type="radio" name="accountType" value="multiple" onclick="enableMultiple()"> Multiple
+            <span id="accountTextMultiple" style="font-family: 'Lucida Console'; font-size: 14px; color: black; background-color:lightyellow"></span>
             <script>
+                function enableMultiple() {
+                    document.querySelector('input[name="accountType"][value="multiple"]').checked = true;
+                    var selectAccount = document.getElementById("selectAccount");
+                    selectAccount.disabled = true;
+                    selectAccount.hidden = true;
+                    document.getElementById("accountTextSingle").innerText = "";
+                    document.getElementById("accountTextMultiple").innerText = "Enter remitter accounts against each payment instruction in the file";
+                }
+
+                function enableSingle() {
+                    document.getElementById("accountTextMultiple").innerText = "";
+                    var selectAccount = document.getElementById("selectAccount");
+                    selectAccount.disabled = false;
+                    selectAccount.hidden = false;
+                    document.querySelector('input[name="accountType"][value="single"]').checked = true;
+                    getBalance();
+                }
+
                 function getBalance() {
                     var select = document.getElementById("selectAccount");
                     var text = select.options[select.selectedIndex].text;
                     if (text == '123456789010' || text == '123456789011' || text == '123456789012') {
-                        document.getElementById("accountText").innerText = "Available balance INR: " + text;
+                        document.getElementById("accountTextSingle").innerText = "Available balance INR: " + text + ".00";
                     } else {
-                        document.getElementById("accountText").innerText = "Select an account";
+                        document.getElementById("accountTextSingle").innerText = "Select an account";
                     }
                 }
             </script>
@@ -117,15 +194,50 @@
                 }
             </script>
             <br><br>
-            <a id="downloadLink" href="#" style="display:none;">Download Sample File</a>
-            <br><br>
+            <a id="downloadLink" href="#" style="display:none; font-size:12px">Download Sample File</a>
+            <br>
             Payment date: <input type="date" id="date" name="date">
             <br><br>
-            <form name="Payment" id="payment" action="#">
-                <label for="myfile">Select file:</label>
-                <input type="file" id="myfile" name="myfile"><br><br>
-                <button class="button">Submit</button>
-            </form>
+                <form name="Payment" id="payment" action="#">
+                    <label for="myfile">Select file:</label>
+                    <input type="file" id="myfile" name="myfile"><br><br>
+                    <div id="drop_zone" style="border: 2px dashed #ccc; padding: 20px; text-align: center;">
+                        Drag and drop a file here
+                    </div>
+                    <br>
+                    <div class="button-container">
+                        <!--Submit Button-->
+                        <button class="button button-submit" id="submit">Submit</button>
+                        <br>
+                        <!--Clear and Reset Form-->
+                        <button class="button button-reset" id="reset" onclick="onClickReset()">Reset Form</button>
+                        <!--<input type="submit" value="Submit">-->
+                    </div>
+                </form>
+            <script>
+                var dropZone = document.getElementById('drop_zone');
+                var fileInput = document.getElementById('myfile');
+
+                dropZone.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dropZone.style.backgroundColor = '#f0f0f0';
+                });
+
+                dropZone.addEventListener('dragleave', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dropZone.style.backgroundColor = '#fff';
+                });
+
+                dropZone.addEventListener('drop', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    dropZone.style.backgroundColor = '#fff';
+                    var files = e.dataTransfer.files;
+                    fileInput.files = files;
+                });
+            </script>
         </fieldset>
     </div>
 
